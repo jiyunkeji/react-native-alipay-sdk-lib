@@ -4,7 +4,7 @@ import type { Listener } from './Types';
 
 const { AlipaySdkLib } = NativeModules;
 
-const AlipaySdkLibModuleEvent = new NativeEventEmitter(AlipaySdkLib);
+const alipaySdkLibEmitter = new NativeEventEmitter(AlipaySdkLib);
 
 let alipaySdkManager: AlipaySdkManager | undefined;
 
@@ -30,12 +30,10 @@ export default class AlipaySdkManager {
     event: EventType,
     listener: AlipaySdkEvents[EventType]
   ) {
-    console.log('alipay addListener');
     if (!this._listeners.has(event)) {
       this._listeners.set(event, listener);
-      console.log('alipay addListener 1');
-      AlipaySdkLibModuleEvent.addListener(event, listener);
-      console.log('alipay addListener 2');
+      alipaySdkLibEmitter.addListener(event, listener);
+      console.log('alipaySdkLibEmitter： success');
     }
   }
   removeListener<EventType extends keyof AlipaySdkEvents>(
@@ -44,13 +42,13 @@ export default class AlipaySdkManager {
   ) {
     if (this._listeners.has(event)) {
       this._listeners.delete(event);
-      AlipaySdkLibModuleEvent.removeListener(event, listener);
+      alipaySdkLibEmitter.removeListener(event, listener);
     }
   }
   removeAllListener() {
     this._listeners.forEach((value, key) => {
       this._listeners.delete(key);
-      AlipaySdkLibModuleEvent.removeListener(key, value);
+      alipaySdkLibEmitter.removeListener(key, value);
     });
     this._listeners.clear();
   }

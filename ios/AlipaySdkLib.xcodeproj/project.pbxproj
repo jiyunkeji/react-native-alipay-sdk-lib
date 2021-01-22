@@ -25,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libAlipaySdkLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAlipaySdkLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		663ABA2E25BB0D4C00BAFBAE /* AlipaySdkLibManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipaySdkLibManager.h; sourceTree = "<group>"; };
+		663ABA2F25BB0D4C00BAFBAE /* AlipaySdkLibManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlipaySdkLibManager.m; sourceTree = "<group>"; };
 		66B5ED2925BA70AB00E457E0 /* AlipayEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayEventManager.m; sourceTree = "<group>"; };
 		66B5ED2A25BA70AB00E457E0 /* AlipayEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayEventManager.h; sourceTree = "<group>"; };
 		66B5ED2E25BA70C000E457E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -55,6 +57,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				663ABA2E25BB0D4C00BAFBAE /* AlipaySdkLibManager.h */,
+				663ABA2F25BB0D4C00BAFBAE /* AlipaySdkLibManager.m */,
 				66B5ED2A25BA70AB00E457E0 /* AlipayEventManager.h */,
 				66B5ED2925BA70AB00E457E0 /* AlipayEventManager.m */,
 				F4FF95D6245B92E800C19C63 /* AlipaySdkLib.swift */,
