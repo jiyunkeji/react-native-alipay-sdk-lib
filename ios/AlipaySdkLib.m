@@ -81,11 +81,6 @@ RCT_REMAP_METHOD(pay, payInfo:(NSString *)payInfo resolver:(RCTPromiseResolveBlo
     }
 }
 
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
-}
-
 + (BOOL)requiresMainQueueSetup {
     return NO;
 }
