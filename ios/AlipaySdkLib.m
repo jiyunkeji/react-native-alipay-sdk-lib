@@ -1,10 +1,20 @@
 #import "AlipaySdkLib.h"
 #import <AlipaySDK/AlipaySDK.h>
-#import <React/RCTEventDispatcher.h>
+#import <React/RCTEventEmitter.h>
+@interface AlipayEventManager : RCTEventEmitter
++(void)sendEventWithName:(NSString *)eventName body:(NSMutableDictionary *)body;
+@end
+@implementation AlipayEventManager
++(void)sendEventWithName:(NSString *)eventName body:(NSMutableDictionary *)body{
+    [self sendEventWithName:eventName body:body];
+}
+@end
+
+
 
 @implementation AlipaySdkLib
 
-RCT_EXPORT_MODULE(AlipaySdkLibModule)
+RCT_EXPORT_MODULE(AlipaySdkLib)
 
 - (NSArray<NSString *> *)supportedEvents
 {
@@ -33,6 +43,7 @@ RCT_REMAP_METHOD(pay, payInfo:(NSString *)payInfo resolver:(RCTPromiseResolveBlo
     [[AlipaySDK defaultService] payOrder:payInfo fromScheme:appScheme callback:^(NSDictionary *resultDic) {
         [AlipaySdkLib handleResult:resultDic];
     }];
+    resolve([NSNumber numberWithBool:YES]);
 }
 
 +(void) handleCallback:(NSURL *)url
@@ -63,15 +74,23 @@ RCT_REMAP_METHOD(pay, payInfo:(NSString *)payInfo resolver:(RCTPromiseResolveBlo
     body[@"result"] = result;
     if ([status integerValue] == 9000) {
         
-        [self sendEventWithName:OnPaySuccessResponse body:body];
+        [AlipayEventManager sendEventWithName:OnPaySuccessResponse body:body];
         
     } else {
-        [self sendEventWithName:OnPayFailResponse body:body];
+        [AlipayEventManager sendEventWithName:OnPayFailResponse body:body];
     }
 }
 
-+ (BOOL)requiresMainQueueSetup{
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
++ (BOOL)requiresMainQueueSetup {
     return NO;
 }
 
+
 @end
+
+

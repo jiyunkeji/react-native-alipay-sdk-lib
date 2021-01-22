@@ -1,6 +1,6 @@
 {
   "name": "react-native-alipay-sdk-lib",
-  "version": "1.0.1",
+  "version": "1.0.10",
   "description": "alipay",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

@@ -2,10 +2,9 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
 import type { AlipaySdkEvents } from './AlipaySdkEvent';
 import type { Listener } from './Types';
 
-const { AlipaySdkLibModule } = NativeModules;
-// const Prefix = AlipaySdkLibModule.WeChatSdk;
+const { AlipaySdkLib } = NativeModules;
 
-const AlipaySdkLibModuleEvent = new NativeEventEmitter(AlipaySdkLibModule);
+const AlipaySdkLibModuleEvent = new NativeEventEmitter(AlipaySdkLib);
 
 let alipaySdkManager: AlipaySdkManager | undefined;
 
@@ -19,8 +18,8 @@ export default class AlipaySdkManager {
     return alipaySdkManager;
   }
 
-  pay(orderInfo: string): Promise<void> {
-    return AlipaySdkLibModule.pay(orderInfo);
+  pay(orderInfo: string): Promise<boolean> {
+    return AlipaySdkLib.pay(orderInfo);
   }
 
   destroy() {
@@ -31,9 +30,12 @@ export default class AlipaySdkManager {
     event: EventType,
     listener: AlipaySdkEvents[EventType]
   ) {
+    console.log('alipay addListener');
     if (!this._listeners.has(event)) {
       this._listeners.set(event, listener);
+      console.log('alipay addListener 1');
       AlipaySdkLibModuleEvent.addListener(event, listener);
+      console.log('alipay addListener 2');
     }
   }
   removeListener<EventType extends keyof AlipaySdkEvents>(

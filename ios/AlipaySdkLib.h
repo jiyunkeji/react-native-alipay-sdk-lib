@@ -1,9 +1,8 @@
 #import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
 #define OnPaySuccessResponse @"onPaySuccessResponse"
 #define OnPayFailResponse @"onPayFailResponse"
 
-@interface AlipaySdkLib : RCTEventEmitter <RCTBridgeModule>
+@interface AlipaySdkLib : NSObject <RCTBridgeModule>
 
 +(void) handleCallback:(NSURL *)url;
 @end

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -25,11 +26,11 @@ public class AlipaySdkLibModule extends ReactContextBaseJavaModule {
 
   @Override
   public String getName() {
-    return "AlipaySdkLibModule";
+    return "AlipaySdkLib";
   }
 
   @ReactMethod
-  public void pay(final String orderInfo) {
+  public void pay(final String orderInfo, Promise promise) {
     final Runnable payRunnable = new Runnable() {
 
       @Override
@@ -47,6 +48,8 @@ public class AlipaySdkLibModule extends ReactContextBaseJavaModule {
     // 必须异步调用
     Thread payThread = new Thread(payRunnable);
     payThread.start();
+    promise.resolve(true);
+
   }
 
   private Handler mHandler = new Handler(getReactApplicationContext().getMainLooper()) {
